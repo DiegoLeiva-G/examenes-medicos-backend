@@ -1,0 +1,6 @@
+.yarn
+dist
+node_modules
+.prettierrc
+prisma
+src/features/_global/domain/schemas/zod/
