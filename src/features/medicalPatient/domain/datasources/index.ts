@@ -1,1 +1,1 @@
-export * from './employee.datasource';
+export * from './medicalPatient.datasource';

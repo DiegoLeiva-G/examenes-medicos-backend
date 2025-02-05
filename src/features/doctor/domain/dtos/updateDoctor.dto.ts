@@ -15,7 +15,7 @@ export class UpdateDoctorDto implements CoreDto<UpdateDoctorDto> {
 
     if (!validationResult.success) {
       throw AppError.badRequest(
-        'Error en la validación del funcionario',
+        'Error en la validación del médico',
         (validationResult.error?.issues || []).map(issue => ({
           field: (issue.path[0] || '').toString(),
           constraint: issue.message,

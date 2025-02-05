@@ -19,17 +19,19 @@ generator zod {
   writeNullishInModelTypes         = true
 }
 
+enum TypeExam {
+  Ultrasound
+  Ray
+  Resonance
+}
+
 model MedicalPatient {
-  id                String    @id @default(cuid())
-  rut               String    @unique
+  id                String  @id @default(cuid())
+  rut               String  @unique
   name              String
   middleName        String?
   lastName          String
   secondaryLastName String?
-  address           String?
-  email             String?
-  phone             String?
-  birthdate         DateTime?
 
   // Relation
   medicalExamination MedicalExamination[]
@@ -41,34 +43,16 @@ model MedicalPatient {
 }
 
 model Doctor {
-  id                String    @id @default(cuid())
-  rut               String    @unique
+  id                String   @id @default(cuid())
   name              String
   middleName        String?
   lastName          String
   secondaryLastName String?
-  address           String?
-  email             String?
-  phone             String?
-  birthdate         DateTime?
+  nameProfession    String[]
+  specialization    String[]
 
   // Relation
   medicalExamination MedicalExamination[]
-  medicalProfession  MedicalProfession[]
-
-  // common
-  deleted   Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-}
-
-model MedicalProfession {
-  id             String @id @default(cuid())
-  name           String
-  specialization String
-
-  // Relation
-  doctor Doctor[]
 
   // common
   deleted   Boolean  @default(false)
@@ -77,8 +61,15 @@ model MedicalProfession {
 }
 
 model MedicalExamination {
-  id       String   @id @default(cuid())
-  dateExam DateTime @default(now())
+  id                   String   @id @default(cuid())
+  dateExam             DateTime @default(now())
+  observation          String?
+  anexes               String?
+  conclusion           String?
+  titleDimension       String?
+  nameDimension        String?
+  measureDimension     String?
+  descriptionDimension String?
 
   // Relation
   medicalPatient           MedicalPatient         @relation(fields: [medicalPatientId], references: [id])
@@ -95,31 +86,12 @@ model MedicalExamination {
 }
 
 model MedicalExaminationType {
-  id          String  @id @default(cuid())
-  name        String
-  observation String?
-  anexes      String?
-  conclusion  String?
+  id   String   @id @default(cuid())
+  name String
+  type TypeExam
 
   // Relation
   medicalExamination MedicalExamination[]
-  dimensions         Dimensions[]
-
-  // common
-  deleted   Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Dimensions {
-  id          String  @id @default(cuid())
-  title       String?
-  name        String
-  measures    String
-  description String?
-
-  // Relation
-  medicalExaminationType MedicalExaminationType[]
 
   // common
   deleted   Boolean  @default(false)

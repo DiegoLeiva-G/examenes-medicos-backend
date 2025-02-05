@@ -1,31 +1,21 @@
 import { Router } from 'express';
-import { EmployeeController } from './controller';
-import { EmployeeDatasourceImpl, EmployeeRepositoryImpl } from '../infrastructure';
-import { PersonDatasourceImpl, PersonRepositoryImpl } from '../../person';
-import { UserDatasourceImpl, UserRepositoryImpl } from '../../user';
-import { AuthMiddleware } from '../../auth';
+import { MedicalPatientController } from './controller';
+import { MedicalPatientDatasourceImpl, MedicalPatientRepositoryImpl } from '../infrastructure';
 
-export class EmployeeRoutes {
+export class MedicalPatientRoutes {
   static get routes(): Router {
     const router = Router();
 
     //* This datasource can be change
-    const datasourceEmployee = new EmployeeDatasourceImpl();
-    const datasourcePerson = new PersonDatasourceImpl();
-    const repositoryEmployee = new EmployeeRepositoryImpl(datasourceEmployee);
-    const repositoryPerson = new PersonRepositoryImpl(datasourcePerson);
-    const controller = new EmployeeController(repositoryEmployee, repositoryPerson);
+    const datasourceMedicalPatient = new MedicalPatientDatasourceImpl();
+    const repositoryMedicalPatient = new MedicalPatientRepositoryImpl(datasourceMedicalPatient);
+    const controller = new MedicalPatientController(repositoryMedicalPatient);
 
-    // * Authentication middleware
-    const userDatasource = new UserDatasourceImpl();
-    const userRepository = new UserRepositoryImpl(userDatasource);
-    const authMiddleware = new AuthMiddleware(userRepository);
-
-    router.get('/', [authMiddleware.validateJWT], controller.getAll);
-    router.get('/:id', [authMiddleware.validateJWT], controller.getById);
-    router.post('/', [authMiddleware.validateJWT], controller.create);
-    router.put('/:id', [authMiddleware.validateJWT], controller.update);
-    router.delete('/:id', [authMiddleware.validateJWT], controller.delete);
+    router.get('/', controller.getAllMedicalPatients);
+    router.get('/:id', controller.getMedicalPatientById);
+    router.delete('/:id', controller.deleteMedicalPatient);
+    router.post('/', controller.createMedicalPatient);
+    router.put('/:id', controller.updateMedicalPatient);
 
     return router;
   }

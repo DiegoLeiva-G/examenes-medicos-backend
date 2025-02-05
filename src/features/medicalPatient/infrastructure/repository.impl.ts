@@ -1,34 +1,39 @@
 import {
-  type CreateEmployeeDto,
-  type EmployeeDatasource,
-  type DoctorEntity,
-  type EmployeeEntityToList,
-  type EmployeeRepository,
-  type GetEmployeeByIdDto,
-  type UpdateEmployeeDto,
+  type CreateMedicalPatientDto,
+  type MedicalPatientCreateResponseEntity,
+  type MedicalPatientDatasource,
+  type MedicalPatientDeleteResponseEntity,
+  type MedicalPatientGetAllResponseEntity,
+  type MedicalPatientGetByIdResponseEntity,
+  type MedicalPatientRepository,
+  type MedicalPatientUpdateResponseEntity,
+  type GetMedicalPatientByIdDto,
+  type UpdateMedicalPatientDto,
 } from '../domain';
 import { type PaginationDto, type PaginationResponseEntity } from '../../_global';
 
-export class EmployeeRepositoryImpl implements EmployeeRepository {
-  constructor(private readonly datasource: EmployeeDatasource) {}
+export class MedicalPatientRepositoryImpl implements MedicalPatientRepository {
+  constructor(private readonly datasource: MedicalPatientDatasource) {}
 
-  async create(createDto: CreateEmployeeDto): Promise<DoctorEntity> {
-    return await this.datasource.create(createDto);
+  async getAllMedicalPatients(
+    pagination: PaginationDto,
+  ): Promise<PaginationResponseEntity<MedicalPatientGetAllResponseEntity[]>> {
+    return await this.datasource.getAllMedicalPatients(pagination);
   }
 
-  async getAll(pagination: PaginationDto): Promise<PaginationResponseEntity<EmployeeEntityToList[]>> {
-    return await this.datasource.getAll(pagination);
+  async getMedicalPatientById(getByIdDto: GetMedicalPatientByIdDto): Promise<MedicalPatientGetByIdResponseEntity> {
+    return await this.datasource.getMedicalPatientById(getByIdDto);
   }
 
-  async getById(getByIdDto: GetEmployeeByIdDto): Promise<DoctorEntity> {
-    return await this.datasource.getById(getByIdDto);
+  async deleteMedicalPatient(getByIdDto: GetMedicalPatientByIdDto): Promise<MedicalPatientDeleteResponseEntity> {
+    return await this.datasource.deleteMedicalPatient(getByIdDto);
   }
 
-  async update(updateDto: UpdateEmployeeDto): Promise<DoctorEntity> {
-    return await this.datasource.update(updateDto);
+  async createMedicalPatient(createDto: CreateMedicalPatientDto): Promise<MedicalPatientCreateResponseEntity> {
+    return await this.datasource.createMedicalPatient(createDto);
   }
 
-  async delete(getByIdDto: GetEmployeeByIdDto): Promise<DoctorEntity> {
-    return await this.datasource.delete(getByIdDto);
+  async updateMedicalPatient(updateDto: UpdateMedicalPatientDto): Promise<MedicalPatientUpdateResponseEntity> {
+    return await this.datasource.updateMedicalPatient(updateDto);
   }
 }

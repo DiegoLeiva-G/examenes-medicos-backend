@@ -38,18 +38,13 @@ export class DoctorDatasourceImpl implements DoctorDatasource {
       prisma.doctor.findMany({
         select: {
           id: true,
-          rut: true,
           name: true,
           middleName: true,
           lastName: true,
           secondaryLastName: true,
-          address: true,
-          email: true,
-          phone: true,
-          birthdate: true,
-          // todo: cambiar por objeto
+          nameProfession: true,
+          specialization: true,
           medicalExamination: true,
-          medicalProfession: true,
           createdAt: true,
         },
         where,
@@ -76,18 +71,13 @@ export class DoctorDatasourceImpl implements DoctorDatasource {
     const doctor = await prisma.doctor.findUnique({
       select: {
         id: true,
-        rut: true,
         name: true,
         middleName: true,
         lastName: true,
         secondaryLastName: true,
-        address: true,
-        email: true,
-        phone: true,
-        birthdate: true,
-        // todo: cambiar por objeto
+        nameProfession: true,
+        specialization: true,
         medicalExamination: true,
-        medicalProfession: true,
         createdAt: true,
       },
       where: {
@@ -119,20 +109,17 @@ export class DoctorDatasourceImpl implements DoctorDatasource {
   }
 
   public async createDoctor(createDto: CreateDoctorDto): Promise<DoctorCreateResponseEntity> {
-    const { rut, name, middleName, lastName, secondaryLastName, address, email, phone, birthdate } =
+    const { name, middleName, lastName, secondaryLastName, nameProfession, specialization } =
       createDto.getValidatedData();
 
     const createdDoctor = await prisma.doctor.create({
       data: {
-        rut,
         name,
         middleName,
         lastName,
         secondaryLastName,
-        address,
-        email,
-        phone,
-        birthdate,
+        nameProfession,
+        specialization,
       },
     });
 
@@ -140,21 +127,17 @@ export class DoctorDatasourceImpl implements DoctorDatasource {
   }
 
   public async updateDoctor(updateDto: UpdateDoctorDto): Promise<DoctorUpdateResponseEntity> {
-    const { id } = await this.updateDoctor(updateDto);
-    const { rut, name, middleName, lastName, secondaryLastName, address, email, phone, birthdate } =
+    const { name, middleName, lastName, secondaryLastName, nameProfession, specialization, id } =
       updateDto.getValidatedData();
 
     const updatedDoctor = await prisma.doctor.update({
       data: {
-        rut,
         name,
         middleName,
         lastName,
         secondaryLastName,
-        address,
-        email,
-        phone,
-        birthdate,
+        nameProfession,
+        specialization,
       },
       where: {
         id,

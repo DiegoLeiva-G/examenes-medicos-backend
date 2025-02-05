@@ -7,6 +7,13 @@ import { z } from 'zod';
 export const MedicalExaminationSchema = z.object({
   id: z.string().cuid(),
   dateExam: z.coerce.date(),
+  observation: z.string().nullish(),
+  anexes: z.string().nullish(),
+  conclusion: z.string().nullish(),
+  titleDimension: z.string().nullish(),
+  nameDimension: z.string().nullish(),
+  measureDimension: z.string().nullish(),
+  descriptionDimension: z.string().nullish(),
   medicalPatientId: z.string(),
   doctorId: z.string(),
   MedicalExaminationTypeId: z.string(),

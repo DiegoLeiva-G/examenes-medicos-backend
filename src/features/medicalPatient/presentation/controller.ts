@@ -1,39 +1,29 @@
 import { type NextFunction, type Request, type Response } from 'express';
 import { type AllInterfaceString, HttpCode, type SuccessResponse } from '../../../core';
 import {
-  CreateEmployee,
-  CreateEmployeeDto,
-  DeleteEmployee,
-  type DoctorEntity,
-  type EmployeeEntityToList,
-  type EmployeeRepository,
-  GetEmployeeById,
-  GetEmployeeByIdDto,
-  GetEmployees,
-  UpdateEmployee,
-  UpdateEmployeeDto,
+  CreateMedicalPatient,
+  CreateMedicalPatientDto,
+  DeleteMedicalPatient,
+  GetMedicalPatientById,
+  GetMedicalPatientByIdDto,
+  GetMedicalPatients,
+  type MedicalPatientEntity,
+  type MedicalPatientRepository,
+  UpdateMedicalPatient,
+  UpdateMedicalPatientDto,
+  type MedicalPatientGetAllResponseEntity,
+  type MedicalPatientGetByIdResponseEntity,
+  type MedicalPatientCreateResponseEntity,
+  type MedicalPatientUpdateResponseEntity,
+  type MedicalPatientDeleteResponseEntity,
 } from '../domain';
 import { PaginationDto, type PaginationResponseEntity } from '../../_global';
-import {
-  CreatePerson,
-  CreatePersonDto,
-  GetPersonByDni,
-  GetPersonByDniDto,
-  type PersonEntity,
-  type PersonRepository,
-  UpdatePerson,
-  UpdatePersonDto,
-} from '../../person';
-import { parseISOStringToDate, parseStringBoolean } from '../../../core/helpers';
-import { type Gender, type StudyLevel } from '@prisma/client';
 
 interface Params {
   id: string;
 }
 
-interface RequestBody
-  extends Partial<AllInterfaceString<Omit<DoctorEntity, 'id'>>>,
-    Partial<AllInterfaceString<Omit<PersonEntity, 'id'>>> {}
+interface RequestBody extends Partial<AllInterfaceString<Omit<MedicalPatientEntity, 'id'>>> {}
 
 interface RequestQuery {
   page: string;
@@ -41,21 +31,19 @@ interface RequestQuery {
   search: string;
 }
 
-export class EmployeeController {
+export class MedicalPatientController {
   //* Dependency injection
-  constructor(
-    private readonly employeeRepository: EmployeeRepository,
-    private readonly personRepository: PersonRepository,
-  ) {}
+  constructor(private readonly medicalPatientRepository: MedicalPatientRepository) {}
 
-  public getAll = (
+  public getAllMedicalPatients = (
     req: Request<unknown, unknown, unknown, RequestQuery>,
-    res: Response<SuccessResponse<PaginationResponseEntity<EmployeeEntityToList[]>>>,
+    res: Response<SuccessResponse<PaginationResponseEntity<MedicalPatientGetAllResponseEntity[]>>>,
     next: NextFunction,
   ): void => {
     const { page = 1, limit = 10, search = '' } = req.query;
     const paginationDto = PaginationDto.create({ page: +page, limit: +limit, search });
-    new GetEmployees(this.employeeRepository)
+
+    new GetMedicalPatients(this.medicalPatientRepository)
       .execute(paginationDto)
       .then(result => res.json({ data: result }))
       .catch(error => {
@@ -63,144 +51,74 @@ export class EmployeeController {
       });
   };
 
-  public getById = (req: Request<Params>, res: Response<SuccessResponse<DoctorEntity>>, next: NextFunction): void => {
+  public getMedicalPatientById = (
+    req: Request<Params>,
+    res: Response<SuccessResponse<MedicalPatientGetByIdResponseEntity>>,
+    next: NextFunction,
+  ): void => {
     const { id } = req.params;
-    const getEmployeeByIdDto = GetEmployeeByIdDto.create({ id });
-    new GetEmployeeById(this.employeeRepository)
-      .execute(getEmployeeByIdDto)
+    const getMedicalPatientByIdDto = GetMedicalPatientByIdDto.create({ id });
+
+    new GetMedicalPatientById(this.medicalPatientRepository)
+      .execute(getMedicalPatientByIdDto)
       .then(result => res.json({ data: result }))
       .catch(next);
   };
 
-  public create = (
+  public createMedicalPatient = (
     req: Request<unknown, unknown, RequestBody>,
-    res: Response<SuccessResponse<DoctorEntity>>,
+    res: Response<SuccessResponse<MedicalPatientCreateResponseEntity>>,
     next: NextFunction,
   ): void => {
-    const {
-      name,
-      middleName,
-      lastName,
-      secondaryLastName,
+    const { rut, name, middleName, lastName, secondaryLastName } = req.body;
+
+    const createMedicalPatientDto = CreateMedicalPatientDto.create({
       rut,
-      birthdate,
-      address,
-      cityId,
-      email,
-      phone,
-      enabled,
-      gender,
-      studyLevel,
-      studyDescription,
-    } = req.body;
-    const createEmployee = (personId: string): void => {
-      const createEmployeeDto = CreateEmployeeDto.create({
-        phone,
-        address,
-        cityId,
-        email,
-        personId,
-        studyLevel: studyLevel as StudyLevel,
-        studyDescription,
-        enabled: parseStringBoolean(enabled),
-      });
-
-      new CreateEmployee(this.employeeRepository)
-        .execute(createEmployeeDto)
-        .then(result => res.status(HttpCode.CREATED).json({ data: result }))
-        .catch(next);
-    };
-
-    const getPersonByDniDto = GetPersonByDniDto.create({ rut: rut ?? '' });
-
-    new GetPersonByDni(this.personRepository)
-      .execute(getPersonByDniDto)
-      .then(getPersonResult => {
-        if (!getPersonResult?.id) {
-          const createPersonDto = CreatePersonDto.create({
-            name,
-            rut,
-            lastName,
-            secondaryLastName,
-            middleName,
-            birthdate: parseISOStringToDate(birthdate),
-            gender: gender as Gender,
-          });
-
-          new CreatePerson(this.personRepository)
-            .execute(createPersonDto)
-            .then(createPersonResult => {
-              createEmployee(createPersonResult.id);
-            })
-            .catch(next);
-
-          return;
-        }
-
-        createEmployee(getPersonResult.id);
-      })
-      .catch(next);
-  };
-
-  public update = (
-    req: Request<Params, unknown, RequestBody>,
-    res: Response<SuccessResponse<DoctorEntity>>,
-    next: NextFunction,
-  ): void => {
-    const { id } = req.params;
-    const {
       name,
       middleName,
       lastName,
       secondaryLastName,
-      birthdate,
-      address,
-      cityId,
-      email,
-      phone,
-      enabled,
-      gender,
-      studyLevel,
-      studyDescription,
-    } = req.body;
-    const updateEmployeeDto = UpdateEmployeeDto.create({
-      id,
-      phone,
-      email,
-      address,
-      cityId,
-      studyLevel: studyLevel as StudyLevel,
-      studyDescription,
-      enabled: parseStringBoolean(enabled),
     });
 
-    new UpdateEmployee(this.employeeRepository)
-      .execute(updateEmployeeDto)
-      .then(result => {
-        const updatePersonDto = UpdatePersonDto.create({
-          id: result.personId ?? '',
-          name,
-          gender: gender as Gender,
-          lastName,
-          secondaryLastName,
-          middleName,
-          birthdate: parseISOStringToDate(birthdate),
-        });
-
-        new UpdatePerson(this.personRepository)
-          .execute(updatePersonDto)
-          .then(() => res.json({ data: result }))
-          .catch(next);
-      })
+    new CreateMedicalPatient(this.medicalPatientRepository)
+      .execute(createMedicalPatientDto)
+      .then(result => res.status(HttpCode.CREATED).json({ data: result }))
       .catch(next);
   };
 
-  public delete = (req: Request<Params>, res: Response<SuccessResponse<DoctorEntity>>, next: NextFunction): void => {
+  public updateMedicalPatient = (
+    req: Request<Params, unknown, RequestBody>,
+    res: Response<SuccessResponse<MedicalPatientUpdateResponseEntity>>,
+    next: NextFunction,
+  ): void => {
     const { id } = req.params;
-    const getEmployeeByIdDto = GetEmployeeByIdDto.create({ id });
+    const { rut, name, middleName, lastName, secondaryLastName } = req.body;
 
-    new DeleteEmployee(this.employeeRepository)
-      .execute(getEmployeeByIdDto)
+    const updateMedicalPatientDto = UpdateMedicalPatientDto.create({
+      id,
+      rut,
+      name,
+      middleName,
+      lastName,
+      secondaryLastName,
+    });
+
+    new UpdateMedicalPatient(this.medicalPatientRepository)
+      .execute(updateMedicalPatientDto)
+      .then(result => res.json({ data: result }))
+      .catch(next);
+  };
+
+  public deleteMedicalPatient = (
+    req: Request<Params>,
+    res: Response<SuccessResponse<MedicalPatientDeleteResponseEntity>>,
+    next: NextFunction,
+  ): void => {
+    const { id } = req.params;
+    const getMedicalPatientByIdDto = GetMedicalPatientByIdDto.create({ id });
+
+    new DeleteMedicalPatient(this.medicalPatientRepository)
+      .execute(getMedicalPatientByIdDto)
       .then(result => res.json({ data: result }))
       .catch(next);
   };

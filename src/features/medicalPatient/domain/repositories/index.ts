@@ -1,1 +1,1 @@
-export * from './employee.respository';
+export * from './medicalPatient.respository';

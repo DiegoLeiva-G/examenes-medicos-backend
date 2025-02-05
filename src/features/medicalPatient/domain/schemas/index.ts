@@ -1,2 +1,2 @@
-export * from './createEmployeeSchema';
-export * from './editEmployeeSchema';
+export * from './createMedicalPatientSchema';
+export * from './updateMedicalPatientSchema';

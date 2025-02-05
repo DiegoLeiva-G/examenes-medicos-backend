@@ -12,7 +12,7 @@ export class GetDoctorByIdDto implements CoreDto<GetDoctorByIdDto> {
 
     if (!validationResult.success) {
       throw AppError.badRequest(
-        'Error en la validación del doctor',
+        'Error en la validación del médico',
         (validationResult.error?.issues || []).map(issue => ({
           field: (issue.path[0] || '').toString(),
           constraint: issue.message,

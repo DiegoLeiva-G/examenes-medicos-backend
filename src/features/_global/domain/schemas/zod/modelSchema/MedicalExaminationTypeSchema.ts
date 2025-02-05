@@ -1,15 +1,14 @@
 import { z } from 'zod';
+import { TypeExamSchema } from '../inputTypeSchemas/TypeExamSchema'
 
 /////////////////////////////////////////
 // MEDICAL EXAMINATION TYPE SCHEMA
 /////////////////////////////////////////
 
 export const MedicalExaminationTypeSchema = z.object({
+  type: TypeExamSchema,
   id: z.string().cuid(),
   name: z.string(),
-  observation: z.string().nullish(),
-  anexes: z.string().nullish(),
-  conclusion: z.string().nullish(),
   deleted: z.boolean(),
   createdAt: z.coerce.date(),
   updatedAt: z.coerce.date(),

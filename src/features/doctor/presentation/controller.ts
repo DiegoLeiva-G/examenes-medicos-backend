@@ -18,7 +18,7 @@ import {
   type DoctorDeleteResponseEntity,
 } from '../domain';
 import { PaginationDto, type PaginationResponseEntity } from '../../_global';
-import { parseISOStringToDate } from '../../../core/helpers';
+import { parseStringToStringArray } from '../../../core/helpers';
 
 interface Params {
   id: string;
@@ -71,18 +71,15 @@ export class DoctorController {
     res: Response<SuccessResponse<DoctorCreateResponseEntity>>,
     next: NextFunction,
   ): void => {
-    const { rut, name, middleName, lastName, secondaryLastName, address, email, phone, birthdate } = req.body;
+    const { name, middleName, lastName, secondaryLastName, nameProfession, specialization } = req.body;
 
     const createDoctorDto = CreateDoctorDto.create({
-      rut,
       name,
       middleName,
       lastName,
       secondaryLastName,
-      address,
-      email,
-      phone,
-      birthdate: parseISOStringToDate(birthdate),
+      nameProfession: parseStringToStringArray(nameProfession),
+      specialization: parseStringToStringArray(specialization),
     });
 
     new CreateDoctor(this.doctorRepository)
@@ -97,18 +94,17 @@ export class DoctorController {
     next: NextFunction,
   ): void => {
     const { id } = req.params;
-    const { rut, name, middleName, lastName, secondaryLastName, address, email, phone, birthdate } = req.body;
+    const { name, middleName, lastName, secondaryLastName, nameProfession, specialization } = req.body;
+
+    console.log(req.body, req.params);
     const updateDoctorDto = UpdateDoctorDto.create({
       id,
-      rut,
       name,
       middleName,
       lastName,
       secondaryLastName,
-      address,
-      email,
-      phone,
-      birthdate: parseISOStringToDate(birthdate),
+      nameProfession: parseStringToStringArray(nameProfession),
+      specialization: parseStringToStringArray(specialization),
     });
 
     new UpdateDoctor(this.doctorRepository)
