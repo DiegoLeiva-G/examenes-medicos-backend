@@ -16,7 +16,7 @@ export const MedicalExaminationSchema = z.object({
   descriptionDimension: z.string().nullish(),
   medicalPatientId: z.string(),
   doctorId: z.string(),
-  MedicalExaminationTypeId: z.string(),
+  medicalExaminationTypeId: z.string(),
   deleted: z.boolean(),
   createdAt: z.coerce.date(),
   updatedAt: z.coerce.date(),
@@ -38,7 +38,6 @@ export type MedicalExaminationPartial = z.infer<typeof MedicalExaminationPartial
 
 export const MedicalExaminationOptionalDefaultsSchema = MedicalExaminationSchema.merge(z.object({
   id: z.string().cuid().optional(),
-  dateExam: z.coerce.date().optional(),
   deleted: z.boolean().optional(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional(),

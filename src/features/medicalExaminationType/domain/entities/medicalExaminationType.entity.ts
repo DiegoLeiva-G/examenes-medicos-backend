@@ -1,11 +1,11 @@
 import { AppError } from '../../../../core';
-import { type MedicalExaminationType, type TypeExam } from '@prisma/client';
+import { type MedicalExaminationType } from '@prisma/client';
 
 export class MedicalExaminationTypeEntity implements MedicalExaminationType {
   constructor(
     public id: MedicalExaminationType['id'],
     public name: MedicalExaminationType['name'],
-    public type: TypeExam,
+    public type: MedicalExaminationType['type'],
     public deleted: MedicalExaminationType['deleted'],
     public createdAt: MedicalExaminationType['createdAt'],
     public updatedAt: MedicalExaminationType['updatedAt'],

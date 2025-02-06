@@ -62,7 +62,7 @@ model Doctor {
 
 model MedicalExamination {
   id                   String   @id @default(cuid())
-  dateExam             DateTime @default(now())
+  dateExam             DateTime
   observation          String?
   anexes               String?
   conclusion           String?
@@ -76,8 +76,8 @@ model MedicalExamination {
   medicalPatientId         String
   doctor                   Doctor                 @relation(fields: [doctorId], references: [id])
   doctorId                 String
-  MedicalExaminationType   MedicalExaminationType @relation(fields: [MedicalExaminationTypeId], references: [id])
-  MedicalExaminationTypeId String
+  medicalExaminationType   MedicalExaminationType @relation(fields: [medicalExaminationTypeId], references: [id])
+  medicalExaminationTypeId String
 
   // common
   deleted   Boolean  @default(false)

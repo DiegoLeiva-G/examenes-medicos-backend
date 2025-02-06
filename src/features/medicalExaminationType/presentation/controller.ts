@@ -37,7 +37,7 @@ export class MedicalExaminationTypeController {
   constructor(private readonly medicalExaminationTypeRepository: MedicalExaminationTypeRepository) {}
 
   public getAllMedicalExaminationTypes = (
-    req: Request<unknown, unknown, unknown, RequestQuery>,
+    req: Request<unknown, unknown, RequestBody, RequestQuery>,
     res: Response<SuccessResponse<PaginationResponseEntity<MedicalExaminationTypeGetAllResponseEntity[]>>>,
     next: NextFunction,
   ): void => {
