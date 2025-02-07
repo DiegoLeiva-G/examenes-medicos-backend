@@ -19,15 +19,12 @@ import {
 } from '../domain';
 import { PaginationDto, type PaginationResponseEntity } from '../../_global';
 import { parseISOStringToDate } from '../../../core/helpers';
-import { type TypeExam } from '@prisma/client';
 
 interface Params {
   id: string;
 }
 
 interface RequestBody extends Partial<AllInterfaceString<Omit<MedicalExaminationEntity, 'id'>>> {
-  type: TypeExam;
-  type2: TypeExam[];
 }
 
 interface RequestQuery {
@@ -40,17 +37,15 @@ export class MedicalExaminationController {
   constructor(private readonly medicalExaminationRepository: MedicalExaminationRepository) {}
 
   public getAllMedicalExaminations = (
-    req: Request<unknown, unknown, RequestBody, RequestQuery>,
+    req: Request<unknown, unknown, unknown, RequestQuery>,
     res: Response<SuccessResponse<PaginationResponseEntity<MedicalExaminationGetAllResponseEntity[]>>>,
     next: NextFunction,
   ): void => {
     const { page = 1, limit = 10 } = req.query;
-    const { type2 } = req.body;
     const paginationDto = PaginationDto.create({ page: +page, limit: +limit });
-    console.log(req.body)
-    console.log(JSON.parse(type2), type2)
+
     new GetMedicalExaminations(this.medicalExaminationRepository)
-      .execute(paginationDto, JSON.parse(type2))
+      .execute(paginationDto)
       .then(result => res.json({ data: result }))
       .catch(error => {
         next(error);

@@ -11,7 +11,7 @@ export class MedicalExaminationRoutes {
     const repositoryMedicalExamination = new MedicalExaminationRepositoryImpl(datasourceMedicalExamination);
     const controller = new MedicalExaminationController(repositoryMedicalExamination);
 
-    router.post('/listar', controller.getAllMedicalExaminations);
+    router.get('/', controller.getAllMedicalExaminations);
     router.get('/:id', controller.getMedicalExaminationById);
     router.delete('/:id', controller.deleteMedicalExamination);
     router.post('/', controller.createMedicalExamination);

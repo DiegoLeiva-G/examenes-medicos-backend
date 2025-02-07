@@ -11,12 +11,10 @@ import {
   type GetMedicalExaminationByIdDto,
   type UpdateMedicalExaminationDto,
 } from '../dtos';
-import type { MedicalExaminationTypeEntity } from '../../../medicalExaminationType';
 
 export abstract class MedicalExaminationRepository {
   abstract getAllMedicalExaminations(
     pagination: PaginationDto,
-    type: Array<MedicalExaminationTypeEntity['type']>,
   ): Promise<PaginationResponseEntity<MedicalExaminationGetAllResponseEntity[]>>;
   abstract getMedicalExaminationById(
     getByIdDto: GetMedicalExaminationByIdDto,

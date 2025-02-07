@@ -14,28 +14,15 @@ import {
   type GetMedicalExaminationByIdDto,
   type UpdateMedicalExaminationDto,
 } from '../domain';
-import type { MedicalExaminationTypeEntity } from '../../medicalExaminationType';
 
 export class MedicalExaminationDatasourceImpl implements MedicalExaminationDatasource {
   public async getAllMedicalExaminations(
     pagination: PaginationDto,
-    type: Array<MedicalExaminationTypeEntity['type']>,
   ): Promise<PaginationResponseEntity<MedicalExaminationGetAllResponseEntity[]>> {
     const { page, limit } = pagination;
 
-    let typesTracking = {};
-
-    if (type.length !== 0) {
-      typesTracking = {
-        type: {
-          in: type.filter(item => item !== null),
-        },
-      };
-    }
-
     const where: Prisma.MedicalExaminationWhereInput = {
       deleted: false,
-      ...typesTracking,
     };
 
     const [totalMedicalExaminations, medicalExaminations] = await prisma.$transaction([

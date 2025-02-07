@@ -11,16 +11,14 @@ import {
   type UpdateMedicalExaminationDto,
 } from '../domain';
 import { type PaginationDto, type PaginationResponseEntity } from '../../_global';
-import type { MedicalExaminationTypeEntity } from '../../medicalExaminationType';
 
 export class MedicalExaminationRepositoryImpl implements MedicalExaminationRepository {
   constructor(private readonly datasource: MedicalExaminationDatasource) {}
 
   async getAllMedicalExaminations(
     pagination: PaginationDto,
-    type: Array<MedicalExaminationTypeEntity['type']>,
   ): Promise<PaginationResponseEntity<MedicalExaminationGetAllResponseEntity[]>> {
-    return await this.datasource.getAllMedicalExaminations(pagination, type);
+    return await this.datasource.getAllMedicalExaminations(pagination);
   }
 
   async getMedicalExaminationById(
