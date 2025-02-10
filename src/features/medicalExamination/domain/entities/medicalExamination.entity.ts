@@ -1,17 +1,12 @@
 import { AppError } from '../../../../core';
-import { type MedicalExamination, type TypeExam } from '@prisma/client';
+import { type MedicalExamination } from '../../../_global';
+import { type TypeExam } from '@prisma/client';
 
 export class MedicalExaminationEntity implements MedicalExamination {
   constructor(
     public id: MedicalExamination['id'],
     public dateExam: MedicalExamination['dateExam'],
-    public observation: MedicalExamination['observation'],
-    public anexes: MedicalExamination['anexes'],
-    public conclusion: MedicalExamination['conclusion'],
-    public titleDimension: MedicalExamination['titleDimension'],
-    public nameDimension: MedicalExamination['nameDimension'],
-    public measureDimension: MedicalExamination['measureDimension'],
-    public descriptionDimension: MedicalExamination['descriptionDimension'],
+    public content: MedicalExamination['content'],
     public medicalPatientId: MedicalExamination['medicalPatientId'],
     public medicalExaminationTypeId: MedicalExamination['medicalExaminationTypeId'],
     public doctorId: MedicalExamination['doctorId'],
@@ -24,13 +19,7 @@ export class MedicalExaminationEntity implements MedicalExamination {
     const {
       id,
       dateExam,
-      observation,
-      anexes,
-      conclusion,
-      titleDimension,
-      nameDimension,
-      measureDimension,
-      descriptionDimension,
+      content,
       medicalPatientId,
       doctorId,
       medicalExaminationTypeId,
@@ -46,13 +35,7 @@ export class MedicalExaminationEntity implements MedicalExamination {
     return new MedicalExaminationEntity(
       id,
       dateExam,
-      observation,
-      anexes,
-      conclusion,
-      titleDimension,
-      nameDimension,
-      measureDimension,
-      descriptionDimension,
+      content,
       medicalPatientId,
       doctorId,
       medicalExaminationTypeId,
@@ -67,13 +50,7 @@ export class MedicalExaminationGetAllResponseEntity implements Pick<MedicalExami
   constructor(
     public id: MedicalExaminationEntity['id'],
     public dateExam: MedicalExaminationEntity['dateExam'],
-    public observation: MedicalExaminationEntity['observation'],
-    public anexes: MedicalExaminationEntity['anexes'],
-    public conclusion: MedicalExaminationEntity['conclusion'],
-    public titleDimension: MedicalExaminationEntity['titleDimension'],
-    public nameDimension: MedicalExaminationEntity['nameDimension'],
-    public measureDimension: MedicalExaminationEntity['measureDimension'],
-    public descriptionDimension: MedicalExaminationEntity['descriptionDimension'],
+    public content: MedicalExaminationEntity['content'],
     public medicalPatient: {
       id: string;
       name: string;
@@ -100,32 +77,12 @@ export class MedicalExaminationGetAllResponseEntity implements Pick<MedicalExami
   ) {}
 
   public static fromJson(obj: MedicalExaminationGetAllResponseEntity): MedicalExaminationGetAllResponseEntity {
-    const {
-      id,
-      dateExam,
-      observation,
-      anexes,
-      conclusion,
-      titleDimension,
-      nameDimension,
-      measureDimension,
-      descriptionDimension,
-      medicalPatient,
-      doctor,
-      medicalExaminationType,
-      createdAt,
-    } = obj;
+    const { id, dateExam, content, medicalPatient, doctor, medicalExaminationType, createdAt } = obj;
 
     return new MedicalExaminationGetAllResponseEntity(
       id,
       dateExam,
-      observation,
-      anexes,
-      conclusion,
-      titleDimension,
-      nameDimension,
-      measureDimension,
-      descriptionDimension,
+      content,
       medicalPatient,
       doctor,
       medicalExaminationType,
@@ -138,13 +95,7 @@ export class MedicalExaminationGetByIdResponseEntity implements Pick<MedicalExam
   constructor(
     public id: MedicalExaminationEntity['id'],
     public dateExam: MedicalExaminationEntity['dateExam'],
-    public observation: MedicalExaminationEntity['observation'],
-    public anexes: MedicalExaminationEntity['anexes'],
-    public conclusion: MedicalExaminationEntity['conclusion'],
-    public titleDimension: MedicalExaminationEntity['titleDimension'],
-    public nameDimension: MedicalExaminationEntity['nameDimension'],
-    public measureDimension: MedicalExaminationEntity['measureDimension'],
-    public descriptionDimension: MedicalExaminationEntity['descriptionDimension'],
+    public content: MedicalExaminationEntity['content'],
     public medicalPatient: {
       id: string;
       name: string;
@@ -171,32 +122,12 @@ export class MedicalExaminationGetByIdResponseEntity implements Pick<MedicalExam
   ) {}
 
   public static fromJson(obj: MedicalExaminationGetByIdResponseEntity): MedicalExaminationGetByIdResponseEntity {
-    const {
-      id,
-      dateExam,
-      observation,
-      anexes,
-      conclusion,
-      titleDimension,
-      nameDimension,
-      measureDimension,
-      descriptionDimension,
-      medicalPatient,
-      doctor,
-      medicalExaminationType,
-      createdAt,
-    } = obj;
+    const { id, dateExam, content, medicalPatient, doctor, medicalExaminationType, createdAt } = obj;
 
     return new MedicalExaminationGetByIdResponseEntity(
       id,
       dateExam,
-      observation,
-      anexes,
-      conclusion,
-      titleDimension,
-      nameDimension,
-      measureDimension,
-      descriptionDimension,
+      content,
       medicalPatient,
       doctor,
       medicalExaminationType,
@@ -209,13 +140,7 @@ export class MedicalExaminationCreateResponseEntity implements Omit<MedicalExami
   constructor(
     public id: MedicalExamination['id'],
     public dateExam: MedicalExamination['dateExam'],
-    public observation: MedicalExamination['observation'],
-    public anexes: MedicalExamination['anexes'],
-    public conclusion: MedicalExamination['conclusion'],
-    public titleDimension: MedicalExamination['titleDimension'],
-    public nameDimension: MedicalExamination['nameDimension'],
-    public measureDimension: MedicalExamination['measureDimension'],
-    public descriptionDimension: MedicalExamination['descriptionDimension'],
+    public content: MedicalExaminationEntity['content'],
     public medicalPatientId: MedicalExamination['medicalPatientId'],
     public medicalExaminationTypeId: MedicalExamination['medicalExaminationTypeId'],
     public doctorId: MedicalExamination['doctorId'],
@@ -223,32 +148,12 @@ export class MedicalExaminationCreateResponseEntity implements Omit<MedicalExami
   ) {}
 
   public static fromJson(obj: MedicalExaminationCreateResponseEntity): MedicalExaminationCreateResponseEntity {
-    const {
-      id,
-      dateExam,
-      observation,
-      anexes,
-      conclusion,
-      titleDimension,
-      nameDimension,
-      measureDimension,
-      descriptionDimension,
-      medicalPatientId,
-      doctorId,
-      medicalExaminationTypeId,
-      createdAt,
-    } = obj;
+    const { id, dateExam, content, medicalPatientId, doctorId, medicalExaminationTypeId, createdAt } = obj;
 
     return new MedicalExaminationCreateResponseEntity(
       id,
       dateExam,
-      observation,
-      anexes,
-      conclusion,
-      titleDimension,
-      nameDimension,
-      measureDimension,
-      descriptionDimension,
+      content,
       medicalPatientId,
       doctorId,
       medicalExaminationTypeId,
@@ -263,44 +168,19 @@ export class MedicalExaminationUpdateResponseEntity
   constructor(
     public id: MedicalExamination['id'],
     public dateExam: MedicalExamination['dateExam'],
-    public observation: MedicalExamination['observation'],
-    public anexes: MedicalExamination['anexes'],
-    public conclusion: MedicalExamination['conclusion'],
-    public titleDimension: MedicalExamination['titleDimension'],
-    public nameDimension: MedicalExamination['nameDimension'],
-    public measureDimension: MedicalExamination['measureDimension'],
-    public descriptionDimension: MedicalExamination['descriptionDimension'],
+    public content: MedicalExaminationEntity['content'],
     public medicalPatientId: MedicalExamination['medicalPatientId'],
     public medicalExaminationTypeId: MedicalExamination['medicalExaminationTypeId'],
     public doctorId: MedicalExamination['doctorId'],
   ) {}
 
   public static fromJson(obj: MedicalExaminationUpdateResponseEntity): MedicalExaminationUpdateResponseEntity {
-    const {
-      id,
-      dateExam,
-      observation,
-      anexes,
-      conclusion,
-      titleDimension,
-      nameDimension,
-      measureDimension,
-      descriptionDimension,
-      medicalPatientId,
-      doctorId,
-      medicalExaminationTypeId,
-    } = obj;
+    const { id, dateExam, content, medicalPatientId, doctorId, medicalExaminationTypeId } = obj;
 
     return new MedicalExaminationUpdateResponseEntity(
       id,
       dateExam,
-      observation,
-      anexes,
-      conclusion,
-      titleDimension,
-      nameDimension,
-      measureDimension,
-      descriptionDimension,
+      content,
       medicalPatientId,
       doctorId,
       medicalExaminationTypeId,

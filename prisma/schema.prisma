@@ -26,12 +26,13 @@ enum TypeExam {
 }
 
 model MedicalPatient {
-  id                String  @id @default(cuid())
-  rut               String  @unique
+  id                String    @id @default(cuid())
+  rut               String    @unique
   name              String
   middleName        String?
   lastName          String
   secondaryLastName String?
+  birthdate         DateTime?
 
   // Relation
   medicalExamination MedicalExamination[]
@@ -61,15 +62,10 @@ model Doctor {
 }
 
 model MedicalExamination {
-  id                   String   @id @default(cuid())
-  dateExam             DateTime
-  observation          String?
-  anexes               String?
-  conclusion           String?
-  titleDimension       String?
-  nameDimension        String?
-  measureDimension     String?
-  descriptionDimension String?
+  id       String    @id @default(cuid())
+  dateExam DateTime
+  fur      DateTime?
+  content  String?
 
   // Relation
   medicalPatient           MedicalPatient         @relation(fields: [medicalPatientId], references: [id])
@@ -86,9 +82,16 @@ model MedicalExamination {
 }
 
 model MedicalExaminationType {
-  id   String   @id @default(cuid())
-  name String
-  type TypeExam
+  id                  String   @id @default(cuid())
+  name                String
+  type                TypeExam
+  observation         String?
+  dimension           String?
+  measures            String?
+  diagnosticDimension String?
+  anexes              String?
+  diagnosticAnexes    String?
+  conclusion          String?
 
   // Relation
   medicalExamination MedicalExamination[]

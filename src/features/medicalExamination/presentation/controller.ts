@@ -24,8 +24,7 @@ interface Params {
   id: string;
 }
 
-interface RequestBody extends Partial<AllInterfaceString<Omit<MedicalExaminationEntity, 'id'>>> {
-}
+interface RequestBody extends Partial<AllInterfaceString<Omit<MedicalExaminationEntity, 'id'>>> {}
 
 interface RequestQuery {
   page: string;
@@ -71,30 +70,11 @@ export class MedicalExaminationController {
     res: Response<SuccessResponse<MedicalExaminationCreateResponseEntity>>,
     next: NextFunction,
   ): void => {
-    const {
-      dateExam,
-      observation,
-      anexes,
-      conclusion,
-      titleDimension,
-      nameDimension,
-      measureDimension,
-      descriptionDimension,
-      medicalPatientId,
-      doctorId,
-      medicalExaminationTypeId,
-      createdAt,
-    } = req.body;
+    const { dateExam, content, medicalPatientId, doctorId, medicalExaminationTypeId, createdAt } = req.body;
 
     const createMedicalExaminationDto = CreateMedicalExaminationDto.create({
       dateExam: parseISOStringToDate(dateExam),
-      observation,
-      anexes,
-      conclusion,
-      titleDimension,
-      nameDimension,
-      measureDimension,
-      descriptionDimension,
+      content,
       medicalPatientId,
       doctorId,
       medicalExaminationTypeId,
@@ -113,30 +93,12 @@ export class MedicalExaminationController {
     next: NextFunction,
   ): void => {
     const { id } = req.params;
-    const {
-      dateExam,
-      observation,
-      anexes,
-      conclusion,
-      titleDimension,
-      nameDimension,
-      measureDimension,
-      descriptionDimension,
-      medicalPatientId,
-      doctorId,
-      medicalExaminationTypeId,
-    } = req.body;
+    const { dateExam, content, medicalPatientId, doctorId, medicalExaminationTypeId } = req.body;
 
     const updateMedicalExaminationDto = UpdateMedicalExaminationDto.create({
       id,
       dateExam: parseISOStringToDate(dateExam),
-      observation,
-      anexes,
-      conclusion,
-      titleDimension,
-      nameDimension,
-      measureDimension,
-      descriptionDimension,
+      content,
       medicalPatientId,
       doctorId,
       medicalExaminationTypeId,

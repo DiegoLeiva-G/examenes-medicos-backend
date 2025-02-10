@@ -11,6 +11,7 @@ export const MedicalPatientSchema = z.object({
   middleName: z.string().nullish(),
   lastName: z.string(),
   secondaryLastName: z.string().nullish(),
+  birthdate: z.coerce.date().nullish(),
   deleted: z.boolean(),
   createdAt: z.coerce.date(),
   updatedAt: z.coerce.date(),

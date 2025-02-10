@@ -40,6 +40,13 @@ export class MedicalExaminationTypeDatasourceImpl implements MedicalExaminationT
           id: true,
           name: true,
           type: true,
+          observation: true,
+          dimension: true,
+          measures: true,
+          diagnosticDimension: true,
+          anexes: true,
+          diagnosticAnexes: true,
+          conclusion: true,
         },
         where,
         skip: (page - 1) * limit,
@@ -50,7 +57,7 @@ export class MedicalExaminationTypeDatasourceImpl implements MedicalExaminationT
     const totalPages = Math.ceil(totalMedicalExaminationTypes / limit);
 
     return {
-      results: medicalExaminationTypes.map(medicalExaminationType =>
+      results: medicalExaminationTypes.map((medicalExaminationType: MedicalExaminationTypeGetAllResponseEntity) =>
         MedicalExaminationTypeGetAllResponseEntity.fromJson(medicalExaminationType),
       ),
       currentPage: page,
@@ -71,6 +78,13 @@ export class MedicalExaminationTypeDatasourceImpl implements MedicalExaminationT
         id: true,
         name: true,
         type: true,
+        observation: true,
+        dimension: true,
+        measures: true,
+        diagnosticDimension: true,
+        anexes: true,
+        diagnosticAnexes: true,
+        conclusion: true,
       },
       where: {
         id,
@@ -105,12 +119,20 @@ export class MedicalExaminationTypeDatasourceImpl implements MedicalExaminationT
   public async createMedicalExaminationType(
     createDto: CreateMedicalExaminationTypeDto,
   ): Promise<MedicalExaminationTypeCreateResponseEntity> {
-    const { name, type } = createDto.getValidatedData();
+    const { name, type, observation, dimension, measures, diagnosticDimension, anexes, diagnosticAnexes, conclusion } =
+      createDto.getValidatedData();
 
     const createdMedicalExaminationType = await prisma.medicalExaminationType.create({
       data: {
         name,
         type,
+        observation,
+        dimension,
+        measures,
+        diagnosticDimension,
+        anexes,
+        diagnosticAnexes,
+        conclusion,
       },
     });
 
@@ -120,12 +142,30 @@ export class MedicalExaminationTypeDatasourceImpl implements MedicalExaminationT
   public async updateMedicalExaminationType(
     updateDto: UpdateMedicalExaminationTypeDto,
   ): Promise<MedicalExaminationTypeUpdateResponseEntity> {
-    const { id, name, type } = updateDto.getValidatedData();
+    const {
+      id,
+      name,
+      type,
+      observation,
+      dimension,
+      measures,
+      diagnosticDimension,
+      anexes,
+      diagnosticAnexes,
+      conclusion,
+    } = updateDto.getValidatedData();
 
     const updatedMedicalExaminationType = await prisma.medicalExaminationType.update({
       data: {
         name,
         type,
+        observation,
+        dimension,
+        measures,
+        diagnosticDimension,
+        anexes,
+        diagnosticAnexes,
+        conclusion,
       },
       where: {
         id,

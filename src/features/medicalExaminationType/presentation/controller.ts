@@ -19,6 +19,7 @@ import {
 } from '../domain';
 import { PaginationDto, type PaginationResponseEntity } from '../../_global';
 import { type TypeExam } from '@prisma/client';
+import { parseISOStringToDate } from '../../../core/helpers';
 
 interface Params {
   id: string;
@@ -71,11 +72,19 @@ export class MedicalExaminationTypeController {
     res: Response<SuccessResponse<MedicalExaminationTypeCreateResponseEntity>>,
     next: NextFunction,
   ): void => {
-    const { name, type } = req.body;
+    const { name, type, observation, dimension, measures, diagnosticDimension, anexes, diagnosticAnexes, conclusion } =
+      req.body;
 
     const createMedicalExaminationTypeDto = CreateMedicalExaminationTypeDto.create({
       name,
       type: type as TypeExam,
+      observation,
+      dimension,
+      measures,
+      diagnosticDimension,
+      anexes,
+      diagnosticAnexes,
+      conclusion,
     });
 
     new CreateMedicalExaminationType(this.medicalExaminationTypeRepository)
@@ -90,12 +99,20 @@ export class MedicalExaminationTypeController {
     next: NextFunction,
   ): void => {
     const { id } = req.params;
-    const { name, type } = req.body;
+    const { name, type, observation, dimension, measures, diagnosticDimension, anexes, diagnosticAnexes, conclusion } =
+      req.body;
 
     const updateMedicalExaminationTypeDto = UpdateMedicalExaminationTypeDto.create({
       id,
       name,
       type: type as TypeExam,
+      observation,
+      dimension,
+      measures,
+      diagnosticDimension,
+      anexes,
+      diagnosticAnexes,
+      conclusion,
     });
 
     new UpdateMedicalExaminationType(this.medicalExaminationTypeRepository)
