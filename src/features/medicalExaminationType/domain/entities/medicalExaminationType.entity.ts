@@ -1,5 +1,5 @@
 import { AppError } from '../../../../core';
-import { type MedicalExaminationType } from '../../../_global';
+import { type MedicalExamination, type MedicalExaminationType } from '../../../_global';
 
 export class MedicalExaminationTypeEntity implements MedicalExaminationType {
   constructor(
@@ -7,11 +7,13 @@ export class MedicalExaminationTypeEntity implements MedicalExaminationType {
     public name: MedicalExaminationType['name'],
     public type: MedicalExaminationType['type'],
     public observation: MedicalExaminationType['observation'],
+    public observation2: MedicalExaminationType['observation2'],
     public dimension: MedicalExaminationType['dimension'],
-    public measures: MedicalExaminationType['measures'],
-    public diagnosticDimension: MedicalExaminationType['diagnosticDimension'],
+    public dimension2: MedicalExaminationType['dimension2'],
+    public descriptionDimension: MedicalExaminationType['descriptionDimension'],
     public anexes: MedicalExaminationType['anexes'],
-    public diagnosticAnexes: MedicalExaminationType['diagnosticAnexes'],
+    public anexes2: MedicalExaminationType['anexes2'],
+    public descriptionAnexes: MedicalExamination['descriptionAnexes'],
     public conclusion: MedicalExaminationType['conclusion'],
     public deleted: MedicalExaminationType['deleted'],
     public createdAt: MedicalExaminationType['createdAt'],
@@ -24,11 +26,13 @@ export class MedicalExaminationTypeEntity implements MedicalExaminationType {
       name,
       type,
       observation,
+      observation2,
       dimension,
-      measures,
-      diagnosticDimension,
+      dimension2,
+      descriptionDimension,
       anexes,
-      diagnosticAnexes,
+      anexes2,
+      descriptionAnexes,
       conclusion,
       deleted,
       createdAt,
@@ -44,11 +48,13 @@ export class MedicalExaminationTypeEntity implements MedicalExaminationType {
       name,
       type,
       observation,
+      observation2,
       dimension,
-      measures,
-      diagnosticDimension,
+      dimension2,
+      descriptionDimension,
       anexes,
-      diagnosticAnexes,
+      anexes2,
+      descriptionAnexes,
       conclusion,
       deleted,
       createdAt,
@@ -65,11 +71,13 @@ export class MedicalExaminationTypeGetAllResponseEntity
     public name: MedicalExaminationTypeEntity['name'],
     public type: MedicalExaminationTypeEntity['type'],
     public observation: MedicalExaminationType['observation'],
+    public observation2: MedicalExaminationType['observation2'],
     public dimension: MedicalExaminationType['dimension'],
-    public measures: MedicalExaminationType['measures'],
-    public diagnosticDimension: MedicalExaminationType['diagnosticDimension'],
+    public dimension2: MedicalExaminationType['dimension2'],
+    public descriptionDimension: MedicalExaminationType['descriptionDimension'],
     public anexes: MedicalExaminationType['anexes'],
-    public diagnosticAnexes: MedicalExaminationType['diagnosticAnexes'],
+    public anexes2: MedicalExaminationType['anexes2'],
+    public descriptionAnexes: MedicalExamination['descriptionAnexes'],
     public conclusion: MedicalExaminationType['conclusion'],
   ) {}
 
@@ -79,11 +87,13 @@ export class MedicalExaminationTypeGetAllResponseEntity
       name,
       type,
       observation,
+      observation2,
       dimension,
-      measures,
-      diagnosticDimension,
+      dimension2,
+      descriptionDimension,
       anexes,
-      diagnosticAnexes,
+      anexes2,
+      descriptionAnexes,
       conclusion,
     } = obj;
 
@@ -92,11 +102,13 @@ export class MedicalExaminationTypeGetAllResponseEntity
       name,
       type,
       observation,
+      observation2,
       dimension,
-      measures,
-      diagnosticDimension,
+      dimension2,
+      descriptionDimension,
       anexes,
-      diagnosticAnexes,
+      anexes2,
+      descriptionAnexes,
       conclusion,
     );
   }
@@ -108,11 +120,13 @@ export class MedicalExaminationTypeGetByIdResponseEntity implements Pick<Medical
     public name: MedicalExaminationTypeEntity['name'],
     public type: MedicalExaminationTypeEntity['type'],
     public observation: MedicalExaminationType['observation'],
+    public observation2: MedicalExaminationType['observation2'],
     public dimension: MedicalExaminationType['dimension'],
-    public measures: MedicalExaminationType['measures'],
-    public diagnosticDimension: MedicalExaminationType['diagnosticDimension'],
+    public dimension2: MedicalExaminationType['dimension2'],
+    public descriptionDimension: MedicalExaminationType['descriptionDimension'],
     public anexes: MedicalExaminationType['anexes'],
-    public diagnosticAnexes: MedicalExaminationType['diagnosticAnexes'],
+    public anexes2: MedicalExaminationType['anexes2'],
+    public descriptionAnexes: MedicalExamination['descriptionAnexes'],
     public conclusion: MedicalExaminationType['conclusion'],
   ) {}
 
@@ -124,11 +138,13 @@ export class MedicalExaminationTypeGetByIdResponseEntity implements Pick<Medical
       name,
       type,
       observation,
+      observation2,
       dimension,
-      measures,
-      diagnosticDimension,
+      dimension2,
+      descriptionDimension,
       anexes,
-      diagnosticAnexes,
+      anexes2,
+      descriptionAnexes,
       conclusion,
     } = obj;
 
@@ -137,11 +153,13 @@ export class MedicalExaminationTypeGetByIdResponseEntity implements Pick<Medical
       name,
       type,
       observation,
+      observation2,
       dimension,
-      measures,
-      diagnosticDimension,
+      dimension2,
+      descriptionDimension,
       anexes,
-      diagnosticAnexes,
+      anexes2,
+      descriptionAnexes,
       conclusion,
     );
   }
@@ -155,11 +173,13 @@ export class MedicalExaminationTypeCreateResponseEntity
     public name: MedicalExaminationTypeEntity['name'],
     public type: MedicalExaminationTypeEntity['type'],
     public observation: MedicalExaminationType['observation'],
+    public observation2: MedicalExaminationType['observation2'],
     public dimension: MedicalExaminationType['dimension'],
-    public measures: MedicalExaminationType['measures'],
-    public diagnosticDimension: MedicalExaminationType['diagnosticDimension'],
+    public dimension2: MedicalExaminationType['dimension2'],
+    public descriptionDimension: MedicalExaminationType['descriptionDimension'],
     public anexes: MedicalExaminationType['anexes'],
-    public diagnosticAnexes: MedicalExaminationType['diagnosticAnexes'],
+    public anexes2: MedicalExaminationType['anexes2'],
+    public descriptionAnexes: MedicalExamination['descriptionAnexes'],
     public conclusion: MedicalExaminationType['conclusion'],
   ) {}
 
@@ -169,11 +189,13 @@ export class MedicalExaminationTypeCreateResponseEntity
       name,
       type,
       observation,
+      observation2,
       dimension,
-      measures,
-      diagnosticDimension,
+      dimension2,
+      descriptionDimension,
       anexes,
-      diagnosticAnexes,
+      anexes2,
+      descriptionAnexes,
       conclusion,
     } = obj;
 
@@ -182,11 +204,13 @@ export class MedicalExaminationTypeCreateResponseEntity
       name,
       type,
       observation,
+      observation2,
       dimension,
-      measures,
-      diagnosticDimension,
+      dimension2,
+      descriptionDimension,
       anexes,
-      diagnosticAnexes,
+      anexes2,
+      descriptionAnexes,
       conclusion,
     );
   }
@@ -200,11 +224,13 @@ export class MedicalExaminationTypeUpdateResponseEntity
       | 'name'
       | 'type'
       | 'observation'
+      | 'observation2'
       | 'dimension'
-      | 'measures'
-      | 'diagnosticDimension'
+      | 'dimension2'
+      | 'descriptionDimension'
       | 'anexes'
-      | 'diagnosticAnexes'
+      | 'anexes2'
+      | 'descriptionAnexes'
       | 'conclusion'
     >
 {
@@ -213,11 +239,13 @@ export class MedicalExaminationTypeUpdateResponseEntity
     public name: MedicalExaminationTypeEntity['name'],
     public type: MedicalExaminationTypeEntity['type'],
     public observation: MedicalExaminationType['observation'],
+    public observation2: MedicalExaminationType['observation2'],
     public dimension: MedicalExaminationType['dimension'],
-    public measures: MedicalExaminationType['measures'],
-    public diagnosticDimension: MedicalExaminationType['diagnosticDimension'],
+    public dimension2: MedicalExaminationType['dimension2'],
+    public descriptionDimension: MedicalExaminationType['descriptionDimension'],
     public anexes: MedicalExaminationType['anexes'],
-    public diagnosticAnexes: MedicalExaminationType['diagnosticAnexes'],
+    public anexes2: MedicalExaminationType['anexes2'],
+    public descriptionAnexes: MedicalExamination['descriptionAnexes'],
     public conclusion: MedicalExaminationType['conclusion'],
   ) {}
 
@@ -227,11 +255,13 @@ export class MedicalExaminationTypeUpdateResponseEntity
       name,
       type,
       observation,
+      observation2,
       dimension,
-      measures,
-      diagnosticDimension,
+      dimension2,
+      descriptionDimension,
       anexes,
-      diagnosticAnexes,
+      anexes2,
+      descriptionAnexes,
       conclusion,
     } = obj;
 
@@ -240,11 +270,13 @@ export class MedicalExaminationTypeUpdateResponseEntity
       name,
       type,
       observation,
+      observation2,
       dimension,
-      measures,
-      diagnosticDimension,
+      dimension2,
+      descriptionDimension,
       anexes,
-      diagnosticAnexes,
+      anexes2,
+      descriptionAnexes,
       conclusion,
     );
   }

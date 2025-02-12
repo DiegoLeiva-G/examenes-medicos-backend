@@ -3,9 +3,7 @@ import { type PaginationDto, type PaginationResponseEntity } from '../../../_glo
 import { type MedicalExaminationRepository } from '../repositories';
 
 export interface GetMedicalExaminationsUseCase {
-  execute: (
-    pagination: PaginationDto,
-  ) => Promise<PaginationResponseEntity<MedicalExaminationGetAllResponseEntity[]>>;
+  execute: (pagination: PaginationDto) => Promise<PaginationResponseEntity<MedicalExaminationGetAllResponseEntity[]>>;
 }
 
 export class GetMedicalExaminations implements GetMedicalExaminationsUseCase {

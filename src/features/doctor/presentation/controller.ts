@@ -96,7 +96,6 @@ export class DoctorController {
     const { id } = req.params;
     const { name, middleName, lastName, secondaryLastName, nameProfession, specialization } = req.body;
 
-    console.log(req.body, req.params);
     const updateDoctorDto = UpdateDoctorDto.create({
       id,
       name,

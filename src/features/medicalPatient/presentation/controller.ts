@@ -18,6 +18,7 @@ import {
   type MedicalPatientDeleteResponseEntity,
 } from '../domain';
 import { PaginationDto, type PaginationResponseEntity } from '../../_global';
+import { parseISOStringToDate } from '../../../core/helpers';
 
 interface Params {
   id: string;
@@ -70,7 +71,7 @@ export class MedicalPatientController {
     res: Response<SuccessResponse<MedicalPatientCreateResponseEntity>>,
     next: NextFunction,
   ): void => {
-    const { rut, name, middleName, lastName, secondaryLastName } = req.body;
+    const { rut, name, middleName, lastName, secondaryLastName, years, fur } = req.body;
 
     const createMedicalPatientDto = CreateMedicalPatientDto.create({
       rut,
@@ -78,6 +79,8 @@ export class MedicalPatientController {
       middleName,
       lastName,
       secondaryLastName,
+      years,
+      fur: parseISOStringToDate(fur),
     });
 
     new CreateMedicalPatient(this.medicalPatientRepository)
@@ -92,7 +95,7 @@ export class MedicalPatientController {
     next: NextFunction,
   ): void => {
     const { id } = req.params;
-    const { rut, name, middleName, lastName, secondaryLastName } = req.body;
+    const { rut, name, middleName, lastName, secondaryLastName, years, fur } = req.body;
 
     const updateMedicalPatientDto = UpdateMedicalPatientDto.create({
       id,
@@ -101,6 +104,8 @@ export class MedicalPatientController {
       middleName,
       lastName,
       secondaryLastName,
+      years,
+      fur: parseISOStringToDate(fur),
     });
 
     new UpdateMedicalPatient(this.medicalPatientRepository)

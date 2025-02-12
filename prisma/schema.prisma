@@ -32,7 +32,8 @@ model MedicalPatient {
   middleName        String?
   lastName          String
   secondaryLastName String?
-  birthdate         DateTime?
+  years             String?
+  fur               DateTime?
 
   // Relation
   medicalExamination MedicalExamination[]
@@ -62,10 +63,17 @@ model Doctor {
 }
 
 model MedicalExamination {
-  id       String    @id @default(cuid())
-  dateExam DateTime
-  fur      DateTime?
-  content  String?
+  id                   String   @id @default(cuid())
+  dateExam             DateTime
+  observation          String?
+  observation2         String?
+  dimension            String?
+  dimension2           String?
+  descriptionDimension String?
+  anexes               String?
+  anexes2              String?
+  descriptionAnexes    String?
+  conclusion           String?
 
   // Relation
   medicalPatient           MedicalPatient         @relation(fields: [medicalPatientId], references: [id])
@@ -82,16 +90,18 @@ model MedicalExamination {
 }
 
 model MedicalExaminationType {
-  id                  String   @id @default(cuid())
-  name                String
-  type                TypeExam
-  observation         String?
-  dimension           String?
-  measures            String?
-  diagnosticDimension String?
-  anexes              String?
-  diagnosticAnexes    String?
-  conclusion          String?
+  id                   String   @id @default(cuid())
+  name                 String
+  type                 TypeExam
+  observation          String?
+  observation2         String?
+  dimension            String?
+  dimension2           String?
+  descriptionDimension String?
+  anexes               String?
+  anexes2              String?
+  descriptionAnexes    String?
+  conclusion           String?
 
   // Relation
   medicalExamination MedicalExamination[]

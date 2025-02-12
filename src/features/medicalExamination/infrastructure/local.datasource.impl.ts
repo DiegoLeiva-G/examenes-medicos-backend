@@ -31,7 +31,15 @@ export class MedicalExaminationDatasourceImpl implements MedicalExaminationDatas
         select: {
           id: true,
           dateExam: true,
-          content: true,
+          observation: true,
+          observation2: true,
+          dimension: true,
+          dimension2: true,
+          descriptionDimension: true,
+          anexes: true,
+          anexes2: true,
+          descriptionAnexes: true,
+          conclusion: true,
           medicalPatient: {
             select: {
               id: true,
@@ -91,7 +99,15 @@ export class MedicalExaminationDatasourceImpl implements MedicalExaminationDatas
       select: {
         id: true,
         dateExam: true,
-        content: true,
+        observation: true,
+        observation2: true,
+        dimension: true,
+        dimension2: true,
+        descriptionDimension: true,
+        anexes: true,
+        anexes2: true,
+        descriptionAnexes: true,
+        conclusion: true,
         medicalPatient: {
           select: {
             id: true,
@@ -155,7 +171,22 @@ export class MedicalExaminationDatasourceImpl implements MedicalExaminationDatas
   public async createMedicalExamination(
     createDto: CreateMedicalExaminationDto,
   ): Promise<MedicalExaminationCreateResponseEntity> {
-    const { dateExam, medicalPatientId, doctorId, medicalExaminationTypeId, createdAt } = createDto.getValidatedData();
+    const {
+      dateExam,
+      observation,
+      observation2,
+      dimension,
+      dimension2,
+      descriptionDimension,
+      anexes,
+      anexes2,
+      descriptionAnexes,
+      conclusion,
+      medicalPatientId,
+      doctorId,
+      medicalExaminationTypeId,
+      createdAt,
+    } = createDto.getValidatedData();
 
     const examinationType = await prisma.medicalExaminationType.findUnique({
       where: {
@@ -170,15 +201,15 @@ export class MedicalExaminationDatasourceImpl implements MedicalExaminationDatas
     const createdMedicalExamination = await prisma.medicalExamination.create({
       data: {
         dateExam,
-        content: JSON.stringify({
-          observation: examinationType.observation,
-          dimension: examinationType.dimension,
-          measures: examinationType.measures,
-          diagnosticDimension: examinationType.diagnosticDimension,
-          anexes: examinationType.anexes,
-          diagnosticAnexes: examinationType.diagnosticAnexes,
-          conclusion: examinationType.conclusion,
-        }),
+        observation,
+        observation2,
+        dimension,
+        dimension2,
+        descriptionDimension,
+        anexes,
+        anexes2,
+        descriptionAnexes,
+        conclusion,
         medicalPatientId,
         doctorId,
         medicalExaminationTypeId,
@@ -192,7 +223,22 @@ export class MedicalExaminationDatasourceImpl implements MedicalExaminationDatas
   public async updateMedicalExamination(
     updateDto: UpdateMedicalExaminationDto,
   ): Promise<MedicalExaminationUpdateResponseEntity> {
-    const { id, dateExam, medicalPatientId, doctorId, medicalExaminationTypeId } = updateDto.getValidatedData();
+    const {
+      id,
+      dateExam,
+      observation,
+      observation2,
+      dimension,
+      dimension2,
+      descriptionDimension,
+      anexes,
+      anexes2,
+      descriptionAnexes,
+      conclusion,
+      medicalPatientId,
+      doctorId,
+      medicalExaminationTypeId,
+    } = updateDto.getValidatedData();
 
     const examinationType = await prisma.medicalExaminationType.findUnique({
       where: {
@@ -207,15 +253,15 @@ export class MedicalExaminationDatasourceImpl implements MedicalExaminationDatas
     const updatedMedicalExamination = await prisma.medicalExamination.update({
       data: {
         dateExam,
-        content: JSON.stringify({
-          observation: examinationType.observation,
-          dimension: examinationType.dimension,
-          measures: examinationType.measures,
-          diagnosticDimension: examinationType.diagnosticDimension,
-          anexes: examinationType.anexes,
-          diagnosticAnexes: examinationType.diagnosticAnexes,
-          conclusion: examinationType.conclusion,
-        }),
+        observation,
+        observation2,
+        dimension,
+        dimension2,
+        descriptionDimension,
+        anexes,
+        anexes2,
+        descriptionAnexes,
+        conclusion,
         medicalPatientId,
         doctorId,
         medicalExaminationTypeId,

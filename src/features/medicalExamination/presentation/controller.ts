@@ -70,11 +70,34 @@ export class MedicalExaminationController {
     res: Response<SuccessResponse<MedicalExaminationCreateResponseEntity>>,
     next: NextFunction,
   ): void => {
-    const { dateExam, content, medicalPatientId, doctorId, medicalExaminationTypeId, createdAt } = req.body;
+    const {
+      dateExam,
+      observation,
+      observation2,
+      dimension,
+      dimension2,
+      descriptionDimension,
+      anexes,
+      anexes2,
+      descriptionAnexes,
+      conclusion,
+      medicalPatientId,
+      doctorId,
+      medicalExaminationTypeId,
+      createdAt,
+    } = req.body;
 
     const createMedicalExaminationDto = CreateMedicalExaminationDto.create({
       dateExam: parseISOStringToDate(dateExam),
-      content,
+      observation,
+      observation2,
+      dimension,
+      dimension2,
+      descriptionDimension,
+      anexes,
+      anexes2,
+      descriptionAnexes,
+      conclusion,
       medicalPatientId,
       doctorId,
       medicalExaminationTypeId,
@@ -93,12 +116,34 @@ export class MedicalExaminationController {
     next: NextFunction,
   ): void => {
     const { id } = req.params;
-    const { dateExam, content, medicalPatientId, doctorId, medicalExaminationTypeId } = req.body;
+    const {
+      dateExam,
+      observation,
+      observation2,
+      dimension,
+      dimension2,
+      descriptionDimension,
+      anexes,
+      anexes2,
+      descriptionAnexes,
+      conclusion,
+      medicalPatientId,
+      doctorId,
+      medicalExaminationTypeId,
+    } = req.body;
 
     const updateMedicalExaminationDto = UpdateMedicalExaminationDto.create({
       id,
       dateExam: parseISOStringToDate(dateExam),
-      content,
+      observation,
+      observation2,
+      dimension,
+      dimension2,
+      descriptionDimension,
+      anexes,
+      anexes2,
+      descriptionAnexes,
+      conclusion,
       medicalPatientId,
       doctorId,
       medicalExaminationTypeId,
