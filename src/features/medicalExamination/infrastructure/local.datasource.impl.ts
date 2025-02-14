@@ -48,6 +48,8 @@ export class MedicalExaminationDatasourceImpl implements MedicalExaminationDatas
               rut: true,
               middleName: true,
               secondaryLastName: true,
+              age: true,
+              fur: true,
             },
           },
           doctor: {
