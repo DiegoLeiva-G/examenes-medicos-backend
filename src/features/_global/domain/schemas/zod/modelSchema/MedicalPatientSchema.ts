@@ -6,12 +6,12 @@ import { z } from 'zod';
 
 export const MedicalPatientSchema = z.object({
   id: z.string().cuid(),
-  rut: z.string(),
+  rut: z.string().nullish(),
   name: z.string(),
   middleName: z.string().nullish(),
   lastName: z.string(),
   secondaryLastName: z.string().nullish(),
-  years: z.string().nullish(),
+  age: z.string().nullish(),
   fur: z.coerce.date().nullish(),
   deleted: z.boolean(),
   createdAt: z.coerce.date(),

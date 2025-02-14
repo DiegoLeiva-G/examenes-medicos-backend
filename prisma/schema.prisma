@@ -27,12 +27,12 @@ enum TypeExam {
 
 model MedicalPatient {
   id                String    @id @default(cuid())
-  rut               String    @unique
+  rut               String?   @unique
   name              String
   middleName        String?
   lastName          String
   secondaryLastName String?
-  years             String?
+  age               String?
   fur               DateTime?
 
   // Relation

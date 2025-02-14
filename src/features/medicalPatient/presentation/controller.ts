@@ -71,7 +71,7 @@ export class MedicalPatientController {
     res: Response<SuccessResponse<MedicalPatientCreateResponseEntity>>,
     next: NextFunction,
   ): void => {
-    const { rut, name, middleName, lastName, secondaryLastName, years, fur } = req.body;
+    const { rut, name, middleName, lastName, secondaryLastName, age, fur } = req.body;
 
     const createMedicalPatientDto = CreateMedicalPatientDto.create({
       rut,
@@ -79,7 +79,7 @@ export class MedicalPatientController {
       middleName,
       lastName,
       secondaryLastName,
-      years,
+      age,
       fur: parseISOStringToDate(fur),
     });
 
@@ -95,7 +95,7 @@ export class MedicalPatientController {
     next: NextFunction,
   ): void => {
     const { id } = req.params;
-    const { rut, name, middleName, lastName, secondaryLastName, years, fur } = req.body;
+    const { rut, name, middleName, lastName, secondaryLastName, age, fur } = req.body;
 
     const updateMedicalPatientDto = UpdateMedicalPatientDto.create({
       id,
@@ -104,7 +104,7 @@ export class MedicalPatientController {
       middleName,
       lastName,
       secondaryLastName,
-      years,
+      age,
       fur: parseISOStringToDate(fur),
     });
 

@@ -43,7 +43,7 @@ export class MedicalPatientDatasourceImpl implements MedicalPatientDatasource {
           middleName: true,
           lastName: true,
           secondaryLastName: true,
-          years: true,
+          age: true,
           fur: true,
           medicalExamination: true,
           createdAt: true,
@@ -79,7 +79,7 @@ export class MedicalPatientDatasourceImpl implements MedicalPatientDatasource {
         middleName: true,
         lastName: true,
         secondaryLastName: true,
-        years: true,
+        age: true,
         fur: true,
         medicalExamination: true,
         createdAt: true,
@@ -115,7 +115,7 @@ export class MedicalPatientDatasourceImpl implements MedicalPatientDatasource {
   }
 
   public async createMedicalPatient(createDto: CreateMedicalPatientDto): Promise<MedicalPatientCreateResponseEntity> {
-    const { rut, name, middleName, lastName, secondaryLastName, years, fur } = createDto.getValidatedData();
+    const { rut, name, middleName, lastName, secondaryLastName, age, fur } = createDto.getValidatedData();
 
     const createdMedicalPatient = await prisma.medicalPatient.create({
       data: {
@@ -124,7 +124,7 @@ export class MedicalPatientDatasourceImpl implements MedicalPatientDatasource {
         middleName,
         lastName,
         secondaryLastName,
-        years,
+        age,
         fur,
       },
     });
@@ -133,7 +133,7 @@ export class MedicalPatientDatasourceImpl implements MedicalPatientDatasource {
   }
 
   public async updateMedicalPatient(updateDto: UpdateMedicalPatientDto): Promise<MedicalPatientUpdateResponseEntity> {
-    const { rut, name, middleName, lastName, secondaryLastName, years, fur, id } = updateDto.getValidatedData();
+    const { rut, name, middleName, lastName, secondaryLastName, age, fur, id } = updateDto.getValidatedData();
 
     const updatedMedicalPatient = await prisma.medicalPatient.update({
       data: {
@@ -142,7 +142,7 @@ export class MedicalPatientDatasourceImpl implements MedicalPatientDatasource {
         middleName,
         lastName,
         secondaryLastName,
-        years,
+        age,
         fur,
       },
       where: {

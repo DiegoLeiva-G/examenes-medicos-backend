@@ -9,7 +9,7 @@ export class MedicalPatientEntity implements MedicalPatient {
     public middleName: MedicalPatient['middleName'],
     public lastName: MedicalPatient['lastName'],
     public secondaryLastName: MedicalPatient['secondaryLastName'],
-    public years: MedicalPatient['years'],
+    public age: MedicalPatient['age'],
     public fur: MedicalPatient['fur'],
     public medicalExamination: unknown[],
     public deleted: MedicalPatient['deleted'],
@@ -25,7 +25,7 @@ export class MedicalPatientEntity implements MedicalPatient {
       middleName,
       lastName,
       secondaryLastName,
-      years,
+      age,
       fur,
       medicalExamination,
       deleted,
@@ -44,7 +44,7 @@ export class MedicalPatientEntity implements MedicalPatient {
       middleName,
       lastName,
       secondaryLastName,
-      years,
+      age,
       fur,
       medicalExamination,
       deleted,
@@ -62,14 +62,14 @@ export class MedicalPatientGetAllResponseEntity implements Omit<MedicalPatientEn
     public middleName: MedicalPatientEntity['middleName'],
     public lastName: MedicalPatientEntity['lastName'],
     public secondaryLastName: MedicalPatientEntity['secondaryLastName'],
-    public years: MedicalPatient['years'],
-    public fur: MedicalPatient['fur'],
+    public age: MedicalPatientEntity['age'],
+    public fur: MedicalPatientEntity['fur'],
     public medicalExamination: MedicalPatientEntity['medicalExamination'],
     public createdAt: MedicalPatientEntity['createdAt'],
   ) {}
 
   public static fromJson(obj: MedicalPatientGetAllResponseEntity): MedicalPatientGetAllResponseEntity {
-    const { id, rut, name, middleName, lastName, secondaryLastName, years, fur, medicalExamination, createdAt } = obj;
+    const { id, rut, name, middleName, lastName, secondaryLastName, age, fur, medicalExamination, createdAt } = obj;
 
     return new MedicalPatientGetAllResponseEntity(
       id,
@@ -78,7 +78,7 @@ export class MedicalPatientGetAllResponseEntity implements Omit<MedicalPatientEn
       middleName,
       lastName,
       secondaryLastName,
-      years,
+      age,
       fur,
       medicalExamination,
       createdAt,
@@ -94,14 +94,14 @@ export class MedicalPatientGetByIdResponseEntity implements Pick<MedicalPatientE
     public middleName: MedicalPatientEntity['middleName'],
     public lastName: MedicalPatientEntity['lastName'],
     public secondaryLastName: MedicalPatientEntity['secondaryLastName'],
-    public years: MedicalPatient['years'],
-    public fur: MedicalPatient['fur'],
+    public age: MedicalPatientEntity['age'],
+    public fur: MedicalPatientEntity['fur'],
     public medicalExamination: MedicalPatientEntity['medicalExamination'],
     public createdAt: MedicalPatientEntity['createdAt'],
   ) {}
 
   public static fromJson(obj: MedicalPatientGetByIdResponseEntity): MedicalPatientGetByIdResponseEntity {
-    const { id, rut, name, middleName, lastName, secondaryLastName, years, fur, medicalExamination, createdAt } = obj;
+    const { id, rut, name, middleName, lastName, secondaryLastName, age, fur, medicalExamination, createdAt } = obj;
 
     return new MedicalPatientGetByIdResponseEntity(
       id,
@@ -110,7 +110,7 @@ export class MedicalPatientGetByIdResponseEntity implements Pick<MedicalPatientE
       middleName,
       lastName,
       secondaryLastName,
-      years,
+      age,
       fur,
       medicalExamination,
       createdAt,
@@ -128,24 +128,18 @@ export class MedicalPatientCreateResponseEntity
     public middleName: MedicalPatientEntity['middleName'],
     public lastName: MedicalPatientEntity['lastName'],
     public secondaryLastName: MedicalPatientEntity['secondaryLastName'],
-    public years: MedicalPatient['years'],
-    public fur: MedicalPatient['fur'],
+    public age: MedicalPatientEntity['age'],
+    public fur: MedicalPatientEntity['fur'],
   ) {}
 
   public static fromJson(obj: MedicalPatientCreateResponseEntity): MedicalPatientCreateResponseEntity {
-    const { id, rut, name, middleName, lastName, secondaryLastName, years, fur } = obj;
+    const { id, rut, name, middleName, lastName, secondaryLastName, age, fur } = obj;
 
-    return new MedicalPatientCreateResponseEntity(id, rut, name, middleName, lastName, secondaryLastName, years, fur);
+    return new MedicalPatientCreateResponseEntity(id, rut, name, middleName, lastName, secondaryLastName, age, fur);
   }
 }
 
-export class MedicalPatientUpdateResponseEntity
-  implements
-    Pick<
-      MedicalPatientEntity,
-      'id' | 'rut' | 'name' | 'middleName' | 'lastName' | 'secondaryLastName' | 'years' | 'fur'
-    >
-{
+export class MedicalPatientUpdateResponseEntity implements Pick<MedicalPatientEntity, 'id'> {
   constructor(
     public id: MedicalPatientEntity['id'],
     public rut: MedicalPatientEntity['rut'],
@@ -153,14 +147,14 @@ export class MedicalPatientUpdateResponseEntity
     public middleName: MedicalPatientEntity['middleName'],
     public lastName: MedicalPatientEntity['lastName'],
     public secondaryLastName: MedicalPatientEntity['secondaryLastName'],
-    public years: MedicalPatient['years'],
-    public fur: MedicalPatient['fur'],
+    public age: MedicalPatientEntity['age'],
+    public fur: MedicalPatientEntity['fur'],
   ) {}
 
   public static fromJson(obj: MedicalPatientUpdateResponseEntity): MedicalPatientUpdateResponseEntity {
-    const { id, rut, name, middleName, lastName, secondaryLastName, years, fur } = obj;
+    const { id, rut, name, middleName, lastName, secondaryLastName, age, fur } = obj;
 
-    return new MedicalPatientUpdateResponseEntity(id, rut, name, middleName, lastName, secondaryLastName, years, fur);
+    return new MedicalPatientUpdateResponseEntity(id, rut, name, middleName, lastName, secondaryLastName, age, fur);
   }
 }
 
