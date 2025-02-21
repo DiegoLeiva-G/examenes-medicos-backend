@@ -72,18 +72,31 @@ export class MedicalExaminationTypeController {
     res: Response<SuccessResponse<MedicalExaminationTypeCreateResponseEntity>>,
     next: NextFunction,
   ): void => {
-    const { name, type, observation, dimension, measures, diagnosticDimension, anexes, diagnosticAnexes, conclusion } =
-      req.body;
+    const {
+      name,
+      type,
+      observation,
+      observation2,
+      dimension,
+      dimension2,
+      descriptionDimension,
+      anexes,
+      anexes2,
+      descriptionAnexes,
+      conclusion,
+    } = req.body;
 
     const createMedicalExaminationTypeDto = CreateMedicalExaminationTypeDto.create({
       name,
       type: type as TypeExam,
       observation,
+      observation2,
       dimension,
-      measures,
-      diagnosticDimension,
+      dimension2,
+      descriptionDimension,
       anexes,
-      diagnosticAnexes,
+      anexes2,
+      descriptionAnexes,
       conclusion,
     });
 
@@ -99,19 +112,32 @@ export class MedicalExaminationTypeController {
     next: NextFunction,
   ): void => {
     const { id } = req.params;
-    const { name, type, observation, dimension, measures, diagnosticDimension, anexes, diagnosticAnexes, conclusion } =
-      req.body;
+    const {
+      name,
+      type,
+      observation,
+      observation2,
+      dimension,
+      dimension2,
+      descriptionDimension,
+      anexes,
+      anexes2,
+      descriptionAnexes,
+      conclusion,
+    } = req.body;
 
     const updateMedicalExaminationTypeDto = UpdateMedicalExaminationTypeDto.create({
       id,
       name,
       type: type as TypeExam,
       observation,
+      observation2,
       dimension,
-      measures,
-      diagnosticDimension,
+      dimension2,
+      descriptionDimension,
       anexes,
-      diagnosticAnexes,
+      anexes2,
+      descriptionAnexes,
       conclusion,
     });
 
